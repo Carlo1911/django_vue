@@ -1,0 +1,24 @@
+// Create title
+
+mutation {
+    createTitle(input: {titleName: "CIO"}) {
+      title {
+        id
+        titleName
+      }
+    }
+  }
+
+
+// List titles
+
+{
+    allTitles {
+    edges {
+      node {
+        id
+        titleName
+      }
+    }
+  }
+}

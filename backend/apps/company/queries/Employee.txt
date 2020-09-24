@@ -1,0 +1,72 @@
+// List Employees
+
+{
+  allEmployees {
+    edges {
+      node {
+        id
+        employeeName
+        employeeCity {
+          id
+          cityName
+        }
+        employeeTitle {
+          id
+          titleName
+        }
+      }
+    }
+  }
+}
+
+// Create Employee
+
+mutation {
+  createEmployee(input: {employeeName: "Francisco Beingolea", employeeCity: "Miami", employeeTitle: "CIO"}) {
+    employee {
+      employeeName
+      employeeCity {
+        cityName
+      }
+      employeeTitle {
+        titleName
+      }
+    }
+  }
+}
+
+// Update Employee
+
+mutation {
+  updateEmployee(input: {
+      id: "RW1wbG95ZWVOb2RlOjM=",
+      employeeName: "Ziko Beingolea",
+      employeeCity: "Miami",
+      employeeTitle: "CIO"}) {
+    employee {
+      employeeName
+      employeeCity {
+        cityName
+      }
+      employeeTitle {
+        titleName
+      }
+    }
+  }
+}
+
+// Delete Employee
+
+mutation {
+  deleteEmployee(input: {id: "RW1wbG95ZWVOb2RlOjM="}) {
+    employee {
+      employeeName
+      employeeCity {
+        cityName
+      }
+      employeeTitle {
+        titleName
+      }
+    }
+  }
+}

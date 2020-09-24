@@ -1,0 +1,75 @@
+version: '3.5'
+services:
+  nginx:
+    restart: always
+    image: nginx:1.19.0-alpine
+    container_name: ${PROJECT_NAME}_nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./backend:/backend
+      - ./backend/media:/media
+      - ./docker/nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+    networks:
+      - project-network
+  web:
+    restart: always
+    build: .
+    image: ${PROJECT_NAME}_project:latest
+    container_name: ${PROJECT_NAME}_app
+    env_file: ./.env
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./backend:/backend
+      - ./backend/media:/media
+    expose:
+      - '8000'
+    links:
+      - redis
+    networks:
+      - project-network
+  db:
+    image: postgres:11.4
+    container_name: ${PROJECT_NAME}_db
+    networks:
+      - project-network
+    env_file: ./.env
+  redis:
+    image: redis:4.0.14
+    container_name: ${PROJECT_NAME}_redis
+    ports:
+      - '6379:6379'
+    networks:
+      - project-network
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: ${PROJECT_NAME}_db_admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'admin@wundermanthompson.com'
+      PGADMIN_DEFAULT_PASSWORD: 'pgadmin123'
+      PGADMIN_LISTEN_PORT: '5050'
+    expose:
+      - '5050'
+    ports:
+      - '5050:5050'
+    depends_on:
+      - db
+    networks:
+      - project-network
+  flower:
+    image: mher/flower
+    container_name: ${PROJECT_NAME}_flower
+    env_file: ./.env
+    depends_on:
+      - redis
+    ports:
+      - 8888:8888
+    networks:
+      - project-network
+networks:
+  project-network:
+    name: ${PROJECT_NAME}-network

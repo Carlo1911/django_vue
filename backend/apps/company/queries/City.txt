@@ -1,0 +1,12 @@
+// List titles
+
+{
+    allCities {
+    edges {
+      node {
+        id
+        cityName
+      }
+    }
+  }
+}
