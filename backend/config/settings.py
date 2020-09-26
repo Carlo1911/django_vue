@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
-from datetime import timedelta
 from os.path import join
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -49,10 +48,10 @@ LOCAL_APPS = [
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -210,6 +209,6 @@ AWS_SNS_SECRET_ACCESS_KEY = os.getenv('AWS_SNS_SECRET_ACCESS_KEY', '')
 AWS_SNS_REGION = os.getenv('AWS_SNS_REGION', '')
 AWS_SNS_ACTIVE = os.getenv('AWS_SNS_ACTIVE', False)
 
-CORS_ORIGIN_WHITELIST = (
-    'http://127.0.0.1:8080',  # Vue's default port
+CORS_ALLOWED_ORIGINS = (
+    'http://localhost:8080',  # Vue's default port
 )
