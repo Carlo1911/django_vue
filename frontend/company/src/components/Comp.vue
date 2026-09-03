@@ -42,7 +42,7 @@
 	try {
         var result = await axios({
           method: 'POST',
-          url: 'http://127.0.0.1/graphql/',
+          url: 'http://127.0.0.1:8091/graphql/',
           data: {
             query: `
             {

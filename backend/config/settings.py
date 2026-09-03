@@ -17,7 +17,7 @@ sys.path.append(join(BASE_DIR, 'apps'))
 SECRET_KEY = os.getenv('SECRET_KEY', 's_-aro!sw@)bob$tojdq!s61$+3s22y=dbe!b5y3!p4ch&y3k#')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', False)
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
 
@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('POSTGRES_DB', 'postgres'),
         'USER': os.getenv('POSTGRES_USER', 'postgres'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'postgres'),
@@ -125,9 +125,9 @@ TIME_ZONE = 'America/Lima'
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -188,7 +188,7 @@ LOGGING = {
 }
 
 # Email
-SEND_EMAILS = os.getenv('SEND_EMAILS', True)
+SEND_EMAILS = os.getenv('SEND_EMAILS', 'True') == 'True'
 MAILGUN_DOMAIN = os.getenv('MAILGUN_DOMAIN')
 MAILGUN_KEY = os.getenv('MAILGUN_KEY')
 SENDGRID_KEY = os.getenv('SENDGRID_KEY')
@@ -198,7 +198,7 @@ GRAPHENE = {
 }
 
 # Twilio
-TWILIO_ACTIVE = os.getenv('TWILIO_ACTIVE', False)
+TWILIO_ACTIVE = os.getenv('TWILIO_ACTIVE', 'False') == 'True'
 TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
 TWILIO_NUMBER = os.getenv('TWILIO_NUMBER', '+51987199629')
@@ -207,7 +207,7 @@ TWILIO_NUMBER = os.getenv('TWILIO_NUMBER', '+51987199629')
 AWS_SNS_ACCESS_KEY = os.getenv('AWS_SNS_ACCESS_KEY', '')
 AWS_SNS_SECRET_ACCESS_KEY = os.getenv('AWS_SNS_SECRET_ACCESS_KEY', '')
 AWS_SNS_REGION = os.getenv('AWS_SNS_REGION', '')
-AWS_SNS_ACTIVE = os.getenv('AWS_SNS_ACTIVE', False)
+AWS_SNS_ACTIVE = os.getenv('AWS_SNS_ACTIVE', 'False') == 'True'
 
 CORS_ALLOWED_ORIGINS = (
     'http://localhost:8080',  # Vue's default port

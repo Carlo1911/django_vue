@@ -21,7 +21,7 @@ class IEDetectionMiddleware(object):
     def __call__(self, request):
         if request.META.get('HTTP_USER_AGENT'):
             user_agent = request.META['HTTP_USER_AGENT']
-            pattern = 'msie [1-8]\.'
+            pattern = r'msie [1-8]\.'
             prog = re.compile(pattern, re.IGNORECASE)
             match = prog.search(user_agent)
             if match:

@@ -7,6 +7,7 @@ from graphql_relay.node.node import from_global_id
 class CityNode(DjangoObjectType):
     class Meta:
         model = City
+        fields = '__all__'
         filter_fields = ['city_name']
         interfaces = (graphene.relay.Node,)
 
@@ -14,6 +15,7 @@ class CityNode(DjangoObjectType):
 class TitleNode(DjangoObjectType):
     class Meta:
         model = Title
+        fields = '__all__'
         filter_fields = ['title_name']
         interfaces = (graphene.relay.Node,)
 
@@ -21,6 +23,7 @@ class TitleNode(DjangoObjectType):
 class EmployeeNode(DjangoObjectType):
     class Meta:
         model = Employee
+        fields = '__all__'
         filter_fields = [
             'employee_name',
             'employee_city__city_name',
@@ -106,7 +109,7 @@ class DeleteEmployee(graphene.relay.ClientIDMutation):
         return DeleteEmployee(employee=employee)
 
 
-class Mutation(graphene.AbstractType):
+class Mutation(object):
     create_title = CreateTitle.Field()
     create_employee = CreateEmployee.Field()
     update_employee = UpdateEmployee.Field()
